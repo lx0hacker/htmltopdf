@@ -28,15 +28,15 @@ if(program.url && program.name){
             headless:true
         });
         const page = await browser.newPage();
-        await page.setUserAgent('Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36')
-        await page.goto(program.url,{timeout:0,waitUntil:"networkidle2"});
+        await page.goto(program.url,{timeout:0,waitUntil:"domcontentloaded"});
         const dimensions = await page.evaluate(()=>{
             return {
                 width: document.documentElement.clientWidth,
                 height: document.documentElement.clientHeight
             };
         });
-        await page.pdf({path:'./reports/'+program.name+'.pdf',width:dimensions['width']+'px',height:dimensions['height']+'px'});
+        //await page.pdf({path:'./reports/'+program.name+'.pdf',width:dimensions['width']+'px',height:dimensions['height']+'px'});
+        await page.screenshot({path:'./reports/'+program.name+'.jpg',quality:100,fullPage:true});
         await browser.close();
     })();
 }
