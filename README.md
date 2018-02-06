@@ -1,4 +1,4 @@
 # Usage
 ```
-npm run start -u "https://www.baidu.com" -n "baidu"
+node main.js -u "https://www.baidu.com" -n "baidu"
 ```
